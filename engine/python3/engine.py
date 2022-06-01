@@ -1515,14 +1515,14 @@ class Engine(IBus.EngineSimple):
         if self.__preedit_ja_string.is_empty():
             return False
         if self.__lookup_table_visible == True:
-            self.do_page_up()
+            self.__page_up(None)
         return True
 
     def __on_key_page_down(self):
         if self.__preedit_ja_string.is_empty():
             return False
         if self.__lookup_table_visible == True:
-            self.do_page_down()
+            self.__page_down(None)
         return True
 
     '''def __on_key_left(self):
