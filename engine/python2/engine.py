@@ -733,8 +733,7 @@ class Engine(IBus.EngineSimple):
         self.update_auxiliary_text(text, visible)
 
     def __page_up(self, obj):
-        # only process cursor down in convert mode
-        if self.__convert_mode != CONV_MODE_ANTHY:
+        if self.__convert_mode != CONV_MODE_ANTHY and self.__convert_mode != CONV_MODE_PREDICTION:
             return False
 
         if not self.__lookup_table.page_up():
@@ -748,8 +747,7 @@ class Engine(IBus.EngineSimple):
         return True
 
     def __page_down(self, obj):
-        # only process cursor down in convert mode
-        if self.__convert_mode != CONV_MODE_ANTHY:
+        if self.__convert_mode != CONV_MODE_ANTHY and self.__convert_mode != CONV_MODE_PREDICTION:
             return False
 
         if not self.__lookup_table.page_down():
@@ -763,8 +761,6 @@ class Engine(IBus.EngineSimple):
         return True
 
     def do_cursor_up(self):
-        # only process cursor down in convert mode
-        # if self.__convert_mode != CONV_MODE_ANTHY:
         if self.__convert_mode != CONV_MODE_ANTHY and self.__convert_mode != CONV_MODE_PREDICTION:
             return False
 
