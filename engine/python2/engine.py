@@ -1572,7 +1572,7 @@ class Engine(IBus.EngineSimple):
         return True
 
     def __on_key_number(self, keyval):
-        if self.__convert_mode != CONV_MODE_ANTHY:
+        if self.__convert_mode != CONV_MODE_ANTHY and self.__convert_mode != CONV_MODE_PREDICTION:
             return False
         if not self.__lookup_table_visible:
             return False
