@@ -82,6 +82,11 @@
       <summary>Page Size</summary>
       <description></description>
     </key>
+    <key name="show-lut-on-convert" type="b">
+      <default>false</default>
+      <summary>Show Lookup Table after Convert/Predict</summary>
+      <description></description>
+    </key>
     <key name="half-width-symbol" type="b">
       <default>false</default>
       <summary>Half Width Symbol</summary>

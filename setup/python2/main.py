@@ -147,6 +147,7 @@ class AnthySetup(object):
                      'behavior-on-focus-out', 'behavior-on-period',
                      'half-width-symbol', 'half-width-number', 'half-width-space',
                      'latin-with-shift',
+                     'show-lut-on-convert',
                      'thumb:keyboard-layout-mode', 'thumb:keyboard-layout',
                      'thumb:fmv-extension', 'thumb:handakuten']:
             section, key = self.__get_section_key(name)

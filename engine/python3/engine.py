@@ -1127,7 +1127,7 @@ class Engine(IBus.EngineSimple):
         else:
             self.__cursor_pos = 0
         self.__fill_lookup_table()
-        self.__lookup_table_visible = False
+        self.__lookup_table_visible = self.__prefs.get_value('common', 'show-lut-on-convert')
 
     def __end_anthy_convert(self):
         if self.__convert_mode == CONV_MODE_OFF:
@@ -2292,7 +2292,7 @@ class Engine(IBus.EngineSimple):
         self.__convert_mode = CONV_MODE_PREDICTION
         self.__cursor_pos = 0
         self.__fill_lookup_table()
-        self.__lookup_table_visible = False
+        self.__lookup_table_visible = self.__prefs.get_value('common', 'show-lut-on-convert')
         self.__invalidate()
 
         return True
@@ -2357,7 +2357,7 @@ class Engine(IBus.EngineSimple):
         self.__convert_mode = CONV_MODE_ANTHY
         self.__cursor_pos = 0
         self.__fill_lookup_table()
-        self.__lookup_table_visible = False
+        self.__lookup_table_visible = self.__prefs.get_value('common', 'show-lut-on-convert')
         self.__invalidate()
 
         return True
