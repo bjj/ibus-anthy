@@ -805,7 +805,8 @@ class Engine(IBus.EngineSimple):
             buf = self.__context.get_segment(i, 0)
             text = buf
             self.__segments.append((0, text))
-        self.__lookup_table_visible = False
+        if not self.__prefs.get_value('common', 'show-lut-on-convert'):
+            self.__lookup_table_visible = False
         self.__fill_lookup_table()
         self.__invalidate()
         return True
@@ -819,7 +820,8 @@ class Engine(IBus.EngineSimple):
                 buf = self.__context.get_segment(i, 0)
                 text = buf
                 self.__segments.append((0, text))
-        self.__lookup_table_visible = False
+        if not self.__prefs.get_value('common', 'show-lut-on-convert'):
+            self.__lookup_table_visible = False
         self.__fill_lookup_table()
         self.__invalidate()
         return True
@@ -1159,6 +1161,8 @@ class Engine(IBus.EngineSimple):
 
             # fill lookup_table
             self.__lookup_table.clear()
+            if nr_predictions == 0:
+                self.__lookup_table_visible = False
             for i in range(0, nr_predictions):
                 buf = self.__context.get_prediction(i)
                 candidate = buf
@@ -1168,6 +1172,8 @@ class Engine(IBus.EngineSimple):
 
         # get segment stat
         nr_candidates = self.__context.get_nr_candidates(self.__cursor_pos)
+        if nr_candidates == 0:
+            self.__lookup_table_visible = False
 
         # fill lookup_table
         self.__lookup_table.clear()
@@ -1555,13 +1561,16 @@ class Engine(IBus.EngineSimple):
             return True
 
         if self.__convert_mode != CONV_MODE_ANTHY:
+            self.__lookup_table_visible = False
             return True
 
         if self.__cursor_pos + 1 >= len(self.__segments):
+            self.__lookup_table_visible = False
             return True
 
         self.__cursor_pos += 1
-        self.__lookup_table_visible = False
+        if not self.__prefs.get_value('common', 'show-lut-on-convert'):
+            self.__lookup_table_visible = False
         self.__fill_lookup_table()
         self.__invalidate()
         return True
@@ -2403,7 +2412,8 @@ class Engine(IBus.EngineSimple):
 
         if 0 <= pos < len(self.__segments) and pos != self.__cursor_pos:
             self.__cursor_pos = pos
-            self.__lookup_table_visible = False
+            if not self.__prefs.get_value('common', 'show-lut-on-convert'):
+                self.__lookup_table_visible = False
             self.__fill_lookup_table()
             self.__invalidate()
 
@@ -2482,7 +2492,8 @@ class Engine(IBus.EngineSimple):
 
         self.__lookup_table.clear()
         self.__lookup_table.set_cursor_visible(False)
-        self.__lookup_table_visible = False
+        if not self.__prefs.get_value('common', 'show-lut-on-convert'):
+            self.__lookup_table_visible = False
         self.update_aux_string('', IBus.AttrList(),
             self.__lookup_table_visible)
         self.__fill_lookup_table()
@@ -2513,7 +2524,6 @@ class Engine(IBus.EngineSimple):
         index = self.__lookup_table.get_cursor_pos()
         candidate = self.__lookup_table.get_candidate(index).get_text()
         self.__segments[self.__cursor_pos] = index, candidate
-        self.__lookup_table_visible = False
         self.__on_key_right()
         self.__invalidate()
         return True
