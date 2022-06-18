@@ -2524,7 +2524,15 @@ class Engine(IBus.EngineSimple):
         index = self.__lookup_table.get_cursor_pos()
         candidate = self.__lookup_table.get_candidate(index).get_text()
         self.__segments[self.__cursor_pos] = index, candidate
-        self.__on_key_right()
+        mode = self.__prefs.get_value('common', 'behavior-on-select-candidate')
+        if mode == 0:
+            self.__on_key_right()
+        elif mode == 1:
+            if self.__convert_mode == CONV_MODE_ANTHY:
+                self.__commit_nth_segment(self.__cursor_pos, 0, 0)
+            elif self.__convert_mode == CONV_MODE_PREDICTION:
+                self.__context.commit_prediction(self.__segments[0][0])
+                self.__commit_string(self.__segments[0][1])
         self.__invalidate()
         return True
 

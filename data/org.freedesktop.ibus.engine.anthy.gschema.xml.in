@@ -72,6 +72,11 @@
       <summary>Behavior on Period</summary>
       <description></description>
     </key>
+    <key name="behavior-on-select-candidate" type="i">
+      <default>0</default>
+      <summary>Behavior on Candidate Selection</summary>
+      <description></description>
+    </key>
     <key name="trigger-periods" type="s">
       <default>',.、。，．'</default>
       <summary>Trigger Periods</summary>
